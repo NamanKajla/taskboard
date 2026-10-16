@@ -1,0 +1,23 @@
+namespace: taskboard
+
+backend:
+  image: taskboard-backend:latest
+  replicas: 2
+  port: 8000
+  databaseUrl: postgresql+psycopg://taskboard:taskboard@postgres:5432/taskboard
+
+frontend:
+  image: taskboard-frontend:latest
+  replicas: 2
+  port: 8080
+
+postgres:
+  image: postgres:16-alpine
+  database: taskboard
+  username: taskboard
+  password: taskboard
+
+ingress:
+  enabled: true
+  className: nginx
+  host: taskboard.local
