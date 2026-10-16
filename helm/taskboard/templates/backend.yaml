@@ -15,13 +15,20 @@ spec:
     spec:
       containers:
         - name: backend
-          image: {{ .Values.backend.image }}
+          image: "{{ .Values.backend.image }}"
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: {{ .Values.backend.port }}
           env:
             - name: DATABASE_URL
               value: {{ .Values.backend.databaseUrl | quote }}
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
           readinessProbe:
             httpGet:
               path: /ready
@@ -46,10 +53,3 @@ spec:
   ports:
     - port: {{ .Values.backend.port }}
       targetPort: {{ .Values.backend.port }}
-          resources:
-            requests:
-              cpu: 100m
-              memory: 128Mi
-            limits:
-              cpu: 500m
-              memory: 512Mi
