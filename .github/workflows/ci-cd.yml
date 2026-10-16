@@ -89,7 +89,7 @@ jobs:
           tags: ghcr.io/${{ steps.names.outputs.owner }}/taskboard-frontend:${{ github.sha }}
 
       - name: Scan backend image with Trivy
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@master
         with:
           image-ref: ghcr.io/${{ steps.names.outputs.owner }}/taskboard-backend:${{ github.sha }}
           format: table
@@ -98,7 +98,7 @@ jobs:
           ignore-unfixed: true
 
       - name: Scan frontend image with Trivy
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@master
         with:
           image-ref: ghcr.io/${{ steps.names.outputs.owner }}/taskboard-frontend:${{ github.sha }}
           format: table
